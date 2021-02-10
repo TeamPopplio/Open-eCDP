@@ -1,8 +1,13 @@
 local Enums = require("common/enums")
 function love.conf(t)
-    local ver = Enums.Version.Major.."."..Enums.Version.Minor.."."..Enums.Version.Patch --concatenated version string
-    if Enums.Version.Label ~= nil then ver = ver.."-"..Enums.Version.Label.."."..Enums.Version.Candidate end --add label and candidate if present
+    if love._console_name then
+        return --consoles should not conf
+    end
     local path = love.filesystem.getSource()
+    local ver = Enums.Version.Major.."."..Enums.Version.Minor.."."..Enums.Version.Patch --concatenated version string
+    if Enums.Version.Label ~= nil then 
+        ver = ver.."-"..Enums.Version.Label.."."..Enums.Version.Candidate --add label and candidate if present
+    end 
     if string.find(path, ".love") or string.find(path, ".exe") then --is this a release? TODO: replace this with a native 'is this game built?' check
         t.window.title = Enums.GameTitle.." [v"..ver.."]"
     else

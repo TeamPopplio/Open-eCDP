@@ -6,14 +6,11 @@ return {
     LoadScene = function()
         --
     end,
-    DrawScene = function()
-        love.graphics.setCanvas(GameVars.TopCanvas) --TOP SCREEN--
-    
-            love.graphics.draw(GFX.Title.BGTop,0,0) --top background at 0x 0y
-    
-        love.graphics.setCanvas(GameVars.BottomCanvas) --BOTTOM SCREEN--
-    
-            love.graphics.draw(GFX.Title.BGBottom,0,0) --bottom background at 0x 0y
+    DrawSceneTop = function()
+        love.graphics.draw(GFX.Title.BGTop,0,0) --top background at 0x 0y
+    end,
+    DrawSceneBottom = function()
+        love.graphics.draw(GFX.Title.BGBottom,0,0) --bottom background at 0x 0y
     end,
     UpdateScene = function(dt)
         --

@@ -9,24 +9,46 @@ local Scenes = require("common/scenes") --gameplay environments
 
 function love.load()
 	--initialize
-    love.audio.setVolume(Data.Volume)
-	love.window.setMode(Enums.Width*Data.Scaling, Enums.Height*Data.Scaling, Enums.WindowFlags)
-	love.mouse.setCursor(GFX.Cursor)
+	love.audio.setVolume(Data.Volume)
+	if GFX.Cursor then
+		love.mouse.setCursor(GFX.Cursor)
+	end
+	Func.ScreenCfg(Data)
 	Func.Save()
 	--temp
 	Scenes[GameVars.ActiveScene].LoadScene()
 end
 
-function love.draw()
+function love.draw(screen)
 	love.graphics.clear() --prepare for drawing
-	
-	Scenes[GameVars.ActiveScene].DrawScene()
+	love.graphics.setColor(1,1,1,1) --opaque white
 
-	love.graphics.setCanvas() --RESET TO MAIN SCREEN--
+	--TOP SCREEN--
+	if not screen then love.graphics.setCanvas(GameVars.TopCanvas) end
+	if screen ~= "bottom" or not screen then Scenes[GameVars.ActiveScene].DrawSceneTop() end
 
-		love.graphics.setColor(1,1,1,1) --#opaque white
-		love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
-		love.graphics.draw(GameVars.BottomCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
+	--BOTTOM SCREEN--
+	if not screen then love.graphics.setCanvas(GameVars.BottomCanvas) end
+	if screen == "bottom" or not screen then Scenes[GameVars.ActiveScene].DrawSceneBottom() end
+
+	if not love._console_name then --RESET TO MAIN SCREEN--
+		love.graphics.setCanvas()
+		love.graphics.setColor(1,1,1,1) --opaque white
+		--this should be done with variables instead - temporary solution
+		if Data.Orientation == Enums.OriHorizontal then
+			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
+			love.graphics.draw(GameVars.BottomCanvas, (Enums.Width)*Data.Scaling, 0, 0, Data.Scaling, Data.Scaling)
+		elseif Data.Orientation == Enums.OriVerticalInverted then
+			love.graphics.draw(GameVars.TopCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
+			love.graphics.draw(GameVars.BottomCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
+		elseif Data.Orientation == Enums.OriHorizontalInverted then
+			love.graphics.draw(GameVars.TopCanvas, (Enums.Width)*Data.Scaling, 0, 0, Data.Scaling, Data.Scaling)
+			love.graphics.draw(GameVars.BottomCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
+		else --default
+			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
+			love.graphics.draw(GameVars.BottomCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
+		end
+	end
 end
 
 --below are unused for now but will be useful in the future--
@@ -38,9 +60,25 @@ end
 function love.mousepressed(x, y, button, istouch, presses)
 	x = x/Data.Scaling --scale up mouse positions
 	y = y/Data.Scaling
-	if y <= Enums.Height/2 then
+	--is there an easier way to do this?--
+	if Data.Orientation == Enums.OriHorizontal then
+		if x > Enums.Width then
+			x = x - Enums.Width
+		end
+	elseif Data.Orientation == Enums.OriVerticalInverted then
+		if y > Enums.Height/2 then
+			y = y - Enums.Height/2
+		end
+	elseif Data.Orientation == Enums.OriHorizontalInverted then
+		if x > Enums.Width then
+			x = x - Enums.Width
+		end
+	end
+	--wrap around
+	if y < Enums.Height/2 then
 		Scenes[GameVars.ActiveScene].MousePressedTopScene(x, y, button, istouch, presses)
 	else
+		y = y-Enums.Height/2
 		-- y = y - Data.ScreenGap
 		Scenes[GameVars.ActiveScene].MousePressedBottomScene(x, y, button, istouch, presses)
 	end

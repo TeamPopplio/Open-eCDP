@@ -41,4 +41,11 @@ return {
     OriVerticalInverted = 3,
     OriHorizontalInverted = 4,
     OriCount = 4, --special enum, ditto
+    --love potion scaling--
+    Scale3DSDefault = 3,
+    Scale3DSOriginal = 1,
+    Scale3DSStretched = 2,
+    Scale3DSAspect = 3,
+    Scale3DSHighDefinition = 4,
+    Scale3DSCount = 4
 }

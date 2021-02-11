@@ -13,6 +13,7 @@ function love.load()
 	if GFX.Cursor then
 		love.mouse.setCursor(GFX.Cursor)
 	end
+	Func.Canvas3DS()
 	Func.ScreenCfg(Data)
 	Func.Save()
 	--temp
@@ -24,23 +25,60 @@ function love.draw(screen)
 	if not love._console_name then
 		--this should be done with variables instead - temporary solution
 		if Data.Orientation == Enums.OriHorizontal then
+			love.graphics.draw(GameVars.BackgroundTopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.BottomCanvas, (Enums.Width)*Data.Scaling, 0, 0, Data.Scaling, Data.Scaling)
 		elseif Data.Orientation == Enums.OriVerticalInverted then
+			love.graphics.draw(GameVars.BackgroundTopCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.TopCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
+			love.graphics.draw(GameVars.BackgroundBottomCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.BottomCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 		elseif Data.Orientation == Enums.OriHorizontalInverted then
+			love.graphics.draw(GameVars.BackgroundTopCanvas, (Enums.Width)*Data.Scaling, 0, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.TopCanvas, (Enums.Width)*Data.Scaling, 0, 0, Data.Scaling, Data.Scaling)
+			love.graphics.draw(GameVars.BackgroundBottomCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.BottomCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 		else --default
+			love.graphics.draw(GameVars.BackgroundTopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
+			love.graphics.draw(GameVars.BackgroundBottomCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.BottomCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
 		end
 	elseif love._console_name == "3DS" then
-		if screen == "bottom" then
-			love.graphics.draw(GameVars.BottomCanvas, 0, 0, 0, Enums.Width*2 / 400, Enums.Height / 240)
-		else
-			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Enums.Width*2 / 320, Enums.Height / 240)
+		--default is the equilvalent of Enums.Scale3DSStretched
+		local ws_top = Enums.Width*2 / 400
+		local ws_bot = Enums.Width*2 / 320
+		local hs = Enums.Height / 240
+		local offsetx_top = 0
+		local offsetx_bot = 0
+		local offsety = 0
+		if Data.Scale3DS == Enums.Scale3DSOriginal then
+			ws_top = 1
+			ws_bot = 1
+			hs = 1
+			offsetx_top = 73
+			offsetx_bot = 33
+			offsety = 25
+		elseif Data.Scale3DS == Enums.Scale3DSAspect then
+			ws_top = Enums.Width*2 / 320
+			ws_bot = Enums.Width*2 / 320
+			hs = Enums.Height / 240
+			offsetx_top = 41
+			offsetx_bot = 0
+			offsety = 0
+		end
+		if screen == "bottom" and Data.Scale3DS ~= Enums.Scale3DSHighDefinition then --og bg
+			love.graphics.draw(GameVars.BackgroundBottomCanvas, offsetx_bot, offsety, 0, ws_bot, hs)
+			love.graphics.draw(GameVars.BottomCanvas, offsetx_bot, offsety, 0, ws_bot, hs)
+		elseif Data.Scale3DS ~= Enums.Scale3DSHighDefinition then --og bg top
+			love.graphics.draw(GameVars.BackgroundBottomCanvas, offsetx_bot, offsety, 0, ws_bot, hs)
+			love.graphics.draw(GameVars.TopCanvas, offsetx_top, offsety, 0, ws_top, hs)
+		elseif screen == "bottom" then --hd bg
+			love.graphics.draw(GameVars.BackgroundBottomCanvas, 0, 0, 0, 1, 1)
+			love.graphics.draw(GameVars.BottomCanvas, 33, 25, 0, 1, 1)
+		else --hd bg top
+			love.graphics.draw(GameVars.BackgroundBottomCanvas, 0, 0, 0, 1, 1)
+			love.graphics.draw(GameVars.TopCanvas, 73, 25, 0, 1, 1)
 		end
 	else --switch, scale up later
 		love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
@@ -48,10 +86,14 @@ function love.draw(screen)
 	end
 	--TOP SCREEN--
 	love.graphics.setColor(1,1,1,1) --opaque white
+	love.graphics.setCanvas(GameVars.BackgroundTopCanvas)
+	Scenes[GameVars.ActiveScene].DrawSceneBackgroundTop()
 	love.graphics.setCanvas(GameVars.TopCanvas)
 	Scenes[GameVars.ActiveScene].DrawSceneTop()
 	--BOTTOM SCREEN
 	love.graphics.setColor(1,1,1,1) --opaque white
+	love.graphics.setCanvas(GameVars.BackgroundBottomCanvas)
+	Scenes[GameVars.ActiveScene].DrawSceneBackgroundBottom()
 	love.graphics.setCanvas(GameVars.BottomCanvas)
 	Scenes[GameVars.ActiveScene].DrawSceneBottom()
 	--RESET TO MAIN SCREEN--

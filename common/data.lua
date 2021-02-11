@@ -2,6 +2,7 @@ require("common/lib/TSerial")
 local Enums = require("common/enums")
 local info = love.filesystem.getInfo("settings.txt")
 local data = {
+    Scale3DS = Enums.Scale3DSDefault,
     Orientation = Enums.OriDefault,
     Scaling = 2,
     Volume = 1.0,

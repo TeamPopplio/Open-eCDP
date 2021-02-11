@@ -43,7 +43,7 @@ return {
         end
         --DRAW BUTTON TEXT HERE
         --already drew everything, increment animations
-        if GameVars.SceneVars.Title.SlowUpdate >= 7 then
+        if GameVars.SceneVars.Title.SlowUpdate >= 20 then
             GameVars.SceneVars.Title.SlowUpdate = 0
             if GameVars.Anim.Title.Selection < #GFX.Title.Selection then
                 GameVars.Anim.Title.Selection = GameVars.Anim.Title.Selection + 1

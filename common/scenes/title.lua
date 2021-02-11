@@ -22,10 +22,16 @@ return {
         love.graphics.clear() --init
 
         --bottom text
+        --Since the option for the original "Enter Password" is highlighted I made the text more inline with what it actually says there
         love.graphics.setColor(0.54,0.03,0.25,1) --shadow color
-        love.graphics.printf("Make a selection!", 1, 168+1, Enums.Width, "center") --shadow
+        love.graphics.printf("Enter your password", 1, 158+1, Enums.Width, "center") --shadow
         love.graphics.setColor(0.98,0.98,0.98,1)
-        love.graphics.printf("Make a selection!", 0, 168, Enums.Width, "center")
+        love.graphics.printf("Enter your password", 0, 158, Enums.Width, "center")
+
+        love.graphics.setColor(0.54,0.03,0.25,1) --shadow color
+        love.graphics.printf("to access the Main Menu.", 1, 173+1, Enums.Width, "center") --shadow
+        love.graphics.setColor(0.98,0.98,0.98,1)
+        love.graphics.printf("to access the Main Menu.", 0, 173, Enums.Width, "center")
         --buttons
         love.graphics.draw(GFX.Title.Button,44,43)
         love.graphics.draw(GFX.Title.Button,44,83)

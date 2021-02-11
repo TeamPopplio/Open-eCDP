@@ -1,6 +1,7 @@
 local Enums = require("common/enums")
 local GFX = require("common/gfx")
 local GameVars = require("common/gamevars")
+require("colorize")
 
 return {
     LoadScene = function()
@@ -32,6 +33,7 @@ return {
         love.graphics.printf("to access the Main Menu.", 1, 173+1, Enums.Width, "center") --shadow
         love.graphics.setColor(0.98,0.98,0.98,1)
         love.graphics.printf("to access the Main Menu.", 0, 173, Enums.Width, "center")
+
         --buttons
         love.graphics.draw(GFX.Title.Button,44,43)
         love.graphics.draw(GFX.Title.Button,44,83)
@@ -42,6 +44,22 @@ return {
             love.graphics.draw(GFX.Title.Atlas.Ok,GFX.Title.Ok[GameVars.Anim.Title.Ok],188,GameVars.SceneVars.Title.Ok)
         end
         --DRAW BUTTON TEXT HERE
+
+        --Enter password
+        love.graphics.setColor(hex("#2B2D2F")) --shadow color
+        love.graphics.printf("Enter Password", 1, 50, Enums.Width, "center") --shadow
+        love.graphics.setColor(0.98,0.98,0.98,1)
+
+        --Change password
+        love.graphics.setColor(hex("#2B2D2F")) --shadow color
+        love.graphics.printf("Change Password", 1, 90, Enums.Width, "center") --shadow
+        love.graphics.setColor(0.98,0.98,0.98,1)
+
+        --Enter Serial Code
+        love.graphics.setColor(hex("#2B2D2F")) --shadow color
+        love.graphics.printf("Enter Serial Code", 1, 130, Enums.Width, "center") --shadow
+        love.graphics.setColor(0.98,0.98,0.98,1)
+
         --already drew everything, increment animations
         if GameVars.SceneVars.Title.SlowUpdate >= 20 then
             GameVars.SceneVars.Title.SlowUpdate = 0

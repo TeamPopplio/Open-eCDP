@@ -3,6 +3,11 @@ local GFX = require("common/gfx")
 local GameVars = require("common/gamevars")
 require("colorize")
 
+src1 = love.audio.newSource("assets/sounds/title.flac", "static")
+src1:setVolume(0.9)
+src1:play()
+
+
 return {
     LoadScene = function()
         GameVars.SceneVars.Title = {

@@ -20,20 +20,8 @@ function love.load()
 end
 
 function love.draw(screen)
-	love.graphics.clear() --prepare for drawing
 	love.graphics.setColor(1,1,1,1) --opaque white
-
-	--TOP SCREEN--
-	if not screen then love.graphics.setCanvas(GameVars.TopCanvas) end
-	if screen ~= "bottom" or not screen then Scenes[GameVars.ActiveScene].DrawSceneTop() end
-
-	--BOTTOM SCREEN--
-	if not screen then love.graphics.setCanvas(GameVars.BottomCanvas) end
-	if screen == "bottom" or not screen then Scenes[GameVars.ActiveScene].DrawSceneBottom() end
-
-	if not love._console_name then --RESET TO MAIN SCREEN--
-		love.graphics.setCanvas()
-		love.graphics.setColor(1,1,1,1) --opaque white
+	if not love._console_name then
 		--this should be done with variables instead - temporary solution
 		if Data.Orientation == Enums.OriHorizontal then
 			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
@@ -48,7 +36,26 @@ function love.draw(screen)
 			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
 			love.graphics.draw(GameVars.BottomCanvas, 0, (Enums.Height/2)*Data.Scaling, 0, Data.Scaling, Data.Scaling)
 		end
+	elseif love._console_name == "3DS" then
+		if screen == "bottom" then
+			love.graphics.draw(GameVars.BottomCanvas, 0, 0, 0, Enums.Width*2 / 400, Enums.Height / 240)
+		else
+			love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Enums.Width*2 / 320, Enums.Height / 240)
+		end
+	else --switch, scale up later
+		love.graphics.draw(GameVars.TopCanvas, 0, 0, 0, Data.Scaling, Data.Scaling)
+		love.graphics.draw(GameVars.BottomCanvas, Enums.Width, 0, 0, Data.Scaling, Data.Scaling)
 	end
+	--TOP SCREEN--
+	love.graphics.setColor(1,1,1,1) --opaque white
+	love.graphics.setCanvas(GameVars.TopCanvas)
+	Scenes[GameVars.ActiveScene].DrawSceneTop()
+	--BOTTOM SCREEN
+	love.graphics.setColor(1,1,1,1) --opaque white
+	love.graphics.setCanvas(GameVars.BottomCanvas)
+	Scenes[GameVars.ActiveScene].DrawSceneBottom()
+	--RESET TO MAIN SCREEN--
+	love.graphics.setCanvas()
 end
 
 --below are unused for now but will be useful in the future--

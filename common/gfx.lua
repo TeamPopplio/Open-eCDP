@@ -10,6 +10,10 @@ local Atlases = {
     }
 }
 return {
+    Font = love.graphics.newImageFont("assets/gfx/fonts/imagefont.png",
+        " ABCDEFGHIJKLMNOPQRSTUVWXYZ" ..
+        "abcdefghijklmnopqrstuvwxyz0" ..
+        "123456789.,!?-+/():;%&`'*#=[]\"", 1),
     Title = {
         Atlas = Atlases.Title,
         Selection = {

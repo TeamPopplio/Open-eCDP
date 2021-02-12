@@ -21,6 +21,7 @@ function love.load()
 end
 
 function love.draw(screen)
+	love.graphics.setFont(GFX.Font) --ecdp font
 	love.graphics.setColor(1,1,1,1) --opaque white
 	if not love._console_name then
 		--this should be done with variables instead - temporary solution

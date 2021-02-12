@@ -29,6 +29,7 @@ return {
         BGBottom = love.graphics.newImage("assets/gfx/title/background_bottom.png"),
         Button = love.graphics.newImage("assets/gfx/title/button.png"),
         SelectedButton = love.graphics.newImage("assets/gfx/title/selectedbutton.png"),
+        eCDPName = love.graphics.newImage("assets/gfx/title/logo.png"),
     },
     Cursor = Cursor
 }

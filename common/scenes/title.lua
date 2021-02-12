@@ -7,6 +7,10 @@ src1 = love.audio.newSource("assets/sounds/title.flac", "static")
 src1:setVolume(0.9)
 src1:play()
 
+font = love.graphics.newImageFont("assets/gfx/fonts/imagefont.png",
+    " ABCDEFGHIJKLMNOPQRSTUVWXYZ" ..
+    "abcdefghijklmnopqrstuvwxyz0" ..
+    "123456789.,!?-+/():;%&`'*#=[]\"", -4)
 
 return {
     LoadScene = function()
@@ -23,12 +27,32 @@ return {
     end,
     DrawSceneTop = function()
         love.graphics.clear() --init
+
+
+        love.graphics.setFont(font)
+
+        love.graphics.push()
+        love.graphics.scale(0.45, 0.45)
+        love.graphics.draw(GFX.Title.eCDPName,210,120)
+        love.graphics.pop()
+
+        --"eCrew Development Program" Text because rn im too lazy to do a image for it
+
+        love.graphics.setColor(hex("#FFFFFF"))
+        love.graphics.push()
+        love.graphics.printf("eCrew Development Program",100,120, Enums.Width)
+        love.graphics.pop()
+
     end,
     DrawSceneBottom = function()
         love.graphics.clear() --init
 
         --bottom text
         --Since the option for the original "Enter Password" is highlighted I made the text more inline with what it actually says there
+        --Note: In the OG game. When no option is currently being selected the text says "Select an option above."
+
+        love.graphics.push()
+        love.graphics.scale(1, 1)
         love.graphics.setColor(0.54,0.03,0.25,1) --shadow color
         love.graphics.printf("Enter your password", 1, 158+1, Enums.Width, "center") --shadow
         love.graphics.setColor(0.98,0.98,0.98,1)
@@ -38,6 +62,8 @@ return {
         love.graphics.printf("to access the Main Menu.", 1, 173+1, Enums.Width, "center") --shadow
         love.graphics.setColor(0.98,0.98,0.98,1)
         love.graphics.printf("to access the Main Menu.", 0, 173, Enums.Width, "center")
+        love.graphics.pop()
+
 
         --buttons
         love.graphics.draw(GFX.Title.Button,44,43)
@@ -85,6 +111,8 @@ return {
     DrawSceneBackgroundTop = function()
         love.graphics.clear() --init
         love.graphics.draw(GFX.Title.BGTop,0,0) --top background at 0x 0y
+
+
     end,
     DrawSceneBackgroundBottom = function()
         love.graphics.clear() --init

@@ -4,7 +4,7 @@ local GameVars = require("common/gamevars")
 require("colorize")
 
 src1 = love.audio.newSource("assets/sounds/title.flac", "static")
-src1:setVolume(0.9)
+src1:setVolume(0.2)
 src1:play()
 
 font = love.graphics.newImageFont("assets/gfx/fonts/imagefont.png",

@@ -6,7 +6,8 @@ end
 local Atlases = {
     Title = {
         Selection = love.graphics.newImage("assets/gfx/title/atlas/selection.png"),
-        Ok = love.graphics.newImage("assets/gfx/title/atlas/ok.png")
+        Ok = love.graphics.newImage("assets/gfx/title/atlas/ok.png"),
+        Man = love.graphics.newImage("assets/gfx/title/atlas/man.png"),
     }
 }
 return {
@@ -29,11 +30,22 @@ return {
             [5] = love.graphics.newQuad(132, 0, 33, 58, Atlases.Title.Ok:getDimensions()),
             [6] = love.graphics.newQuad(165, 0, 33, 58, Atlases.Title.Ok:getDimensions())
         },
+        Man = {
+            [1] = love.graphics.newQuad(0, 0, 449, 167, Atlases.Title.Man:getDimensions()),
+            [2] = love.graphics.newQuad(53, 0, 449, 167, Atlases.Title.Man:getDimensions()),
+            [3] = love.graphics.newQuad(107, 0, 449, 167, Atlases.Title.Man:getDimensions()),
+            [4] = love.graphics.newQuad(162, 0, 449, 167, Atlases.Title.Man:getDimensions()),
+            [5] = love.graphics.newQuad(215, 0, 449, 167, Atlases.Title.Man:getDimensions()),
+            [6] = love.graphics.newQuad(268, 0, 449, 167, Atlases.Title.Man:getDimensions()),
+            [7] = love.graphics.newQuad(321, 0, 449, 167, Atlases.Title.Man:getDimensions()),
+            [8] = love.graphics.newQuad(374, 0, 449, 167, Atlases.Title.Man:getDimensions())
+        },
         BGTop = love.graphics.newImage("assets/gfx/title/background.png"),
         BGBottom = love.graphics.newImage("assets/gfx/title/background_bottom.png"),
         Button = love.graphics.newImage("assets/gfx/title/button.png"),
         SelectedButton = love.graphics.newImage("assets/gfx/title/selectedbutton.png"),
         eCDPName = love.graphics.newImage("assets/gfx/title/logo.png"),
+        Women = love.graphics.newImage("assets/gfx/title/women.png")
     },
     Cursor = Cursor
 }

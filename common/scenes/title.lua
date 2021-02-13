@@ -4,6 +4,7 @@ local GFX = require("common/gfx")
 local GameVars = require("common/gamevars")
 local Audio = require("common/audio")
 
+
 return {
     LoadScene = function()
         love.audio.stop()
@@ -41,6 +42,7 @@ return {
         love.graphics.draw(GFX.Title.Atlas.Man,GFX.Title.Man[GameVars.Anim.Title.Man],40,GameVars.SceneVars.Title.Man)
 
     end,
+
     DrawSceneBottom = function()
         love.graphics.clear() --init
 

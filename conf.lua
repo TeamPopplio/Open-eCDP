@@ -17,4 +17,5 @@ function love.conf(t)
     t.window.width = Enums.Width
     t.window.height = Enums.Height
     t.window.icon = "assets/gfx/common/logo.png"
+
 end

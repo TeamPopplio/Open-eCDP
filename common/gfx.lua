@@ -31,14 +31,15 @@ return {
             [6] = love.graphics.newQuad(165, 0, 33, 58, Atlases.Title.Ok:getDimensions())
         },
         Man = {
-            [1] = love.graphics.newQuad(0, 0, 449, 167, Atlases.Title.Man:getDimensions()),
-            [2] = love.graphics.newQuad(53, 0, 449, 167, Atlases.Title.Man:getDimensions()),
-            [3] = love.graphics.newQuad(107, 0, 449, 167, Atlases.Title.Man:getDimensions()),
-            [4] = love.graphics.newQuad(162, 0, 449, 167, Atlases.Title.Man:getDimensions()),
-            [5] = love.graphics.newQuad(215, 0, 449, 167, Atlases.Title.Man:getDimensions()),
-            [6] = love.graphics.newQuad(268, 0, 449, 167, Atlases.Title.Man:getDimensions()),
-            [7] = love.graphics.newQuad(321, 0, 449, 167, Atlases.Title.Man:getDimensions()),
-            [8] = love.graphics.newQuad(374, 0, 449, 167, Atlases.Title.Man:getDimensions())
+            [1] = love.graphics.newQuad(0, 0, 53, 167, Atlases.Title.Man:getDimensions()),
+            --top left xy, bottom right xy
+            [2] = love.graphics.newQuad(53, 0, 107, 167, Atlases.Title.Man:getDimensions()),
+            [3] = love.graphics.newQuad(107, 0, 161, 167, Atlases.Title.Man:getDimensions()),
+            -- [4] = love.graphics.newQuad(162, 0, 215, 167, Atlases.Title.Man:getDimensions()),
+            -- [5] = love.graphics.newQuad(215, 0, 268, 167, Atlases.Title.Man:getDimensions()),
+            -- [6] = love.graphics.newQuad(268, 0, 321, 167, Atlases.Title.Man:getDimensions()),
+            -- [7] = love.graphics.newQuad(321, 0, 374, 167, Atlases.Title.Man:getDimensions()),
+            -- [8] = love.graphics.newQuad(374, 0, 427, 167, Atlases.Title.Man:getDimensions())
         },
         BGTop = love.graphics.newImage("assets/gfx/title/background.png"),
         BGBottom = love.graphics.newImage("assets/gfx/title/background_bottom.png"),

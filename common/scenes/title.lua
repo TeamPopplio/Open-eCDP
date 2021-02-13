@@ -38,7 +38,6 @@ return {
 
         love.graphics.draw(GFX.Title.eCDPName,102,56)
         love.graphics.draw(GFX.Title.Women,10,40)
-
         love.graphics.draw(GFX.Title.Atlas.Man,GFX.Title.Man[GameVars.Anim.Title.Man],40,GameVars.SceneVars.Title.Man)
 
     end,
@@ -93,17 +92,17 @@ return {
         end
 
         --Enter password
-        love.graphics.setColor(hex("#2B2D2F"))
+        love.graphics.setColor(hex("#656565"))
         love.graphics.printf("Enter Password", 1, 50, Enums.Width, "center") --shadow
         love.graphics.setColor(0.98,0.98,0.98,1)
 
         --Change password
-        love.graphics.setColor(hex("#2B2D2F"))
+        love.graphics.setColor(hex("#656565"))
         love.graphics.printf("Change Password", 1, 90, Enums.Width, "center") --shadow
         love.graphics.setColor(0.98,0.98,0.98,1)
 
         --Enter Serial Code
-        love.graphics.setColor(hex("#2B2D2F"))
+        love.graphics.setColor(hex("#656565"))
         love.graphics.printf("Enter Serial Code", 1, 130, Enums.Width, "center") --shadow
         love.graphics.setColor(0.98,0.98,0.98,1)
     end,
